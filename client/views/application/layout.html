@@ -1,0 +1,38 @@
+<template name="layout">
+    <div class="container">
+        <header>
+            <h1>
+                The Kitten Web
+            </h1>
+            {{#if currentUser }}
+                <a id="logoutBtn">
+                    <i class="fa fa-sign-out"></i>
+                    Quit {{currentUser.username}}
+                </a>
+            {{else}}
+                <a id="loginBtn" href="/login">
+                    <i class="fa fa-sign-in"></i>
+                    Sign In
+                </a>
+            {{/if}}
+        </header>
+        <nav class="row">
+            <a id="home-anchor" class="col-lg-2" href="/">
+                Home
+            </a>
+            <a class="col-lg-2" href="/news">
+                News
+            </a>
+            <a class="col-lg-2" href="/cats">
+                Cats
+            </a>
+            <a class="col-lg-3" href="{{pathFor 'discussPage'}}">
+                Discussions
+            </a>
+            <a class="col-lg-3" href="/contacts">
+                Contact us
+            </a>
+        </nav>
+        {{> yield }}
+    </div>
+</template>

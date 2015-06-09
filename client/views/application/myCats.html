@@ -1,0 +1,27 @@
+<template name="myCats">
+    <h1>
+        My kitties
+    </h1>
+    <a href="/newcat">
+        Add cat
+    </a>
+    <div class="row">
+    {{#each kitty}}
+        <div class="cat col-md-4">
+            <div class="img-wrapper">
+                <img src="{{avatar}}">
+            </div>
+            <div class="cat-body">
+                Name: {{name}}
+                Age: {{age}}
+                Sex: {{sex}}
+                Weight: {{weight}}
+                Kind: {{kind}}
+            </div>
+            <div class="cat-footer">
+                <a href="{{pathFor 'catPage'}}">Go to the {{name}}'s page</a>
+            </div>
+        </div>
+    {{/each}}
+    </div>
+</template>
