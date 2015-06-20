@@ -86,3 +86,38 @@ header h1 {
 .img-wrapper img {
     width:100%;
 }
+
+.thread-block {
+    border:1px dashed black;
+    margin:10px;
+}
+
+.thread-container {
+    margin-top:15px;
+    background:white;
+    height:600px;
+    overflow-y:scroll;
+}
+
+.message-wrapper {
+    border:1px solid black;
+    padding:10px;
+}
+
+textarea {
+    width:100%;
+    display:block;
+    margin-top:10px;
+}
+
+.write-post {
+    margin-top:10px;
+    margin-bottom:20px;
+}
+
+
+
+
+.date-wrapper {
+    float:right;
+}

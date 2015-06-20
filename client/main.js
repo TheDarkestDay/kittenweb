@@ -109,3 +109,48 @@ Template.catsPage.helpers({
         return cats.find();
     }
 });
+
+
+
+Template.discussPage.helpers({
+    thread: function() {
+        return threads.find();
+    }
+});
+
+Template.newThreadPage.events({
+    "click #crt-thread-btn": function(evt, template) {
+        evt.preventDefault();
+        console.log('blah');
+        var topicName = template.find("#topic-name").value;
+        Meteor.call('threadInsert',topicName, function(err, result) {
+            if (err)
+                alert(err.reason);
+            else
+                Router.go('/discuss');
+        });
+    }
+});
+
+
+Template.threadPage.helpers({
+    post: function() {
+        return posts.find();
+    }
+});
+
+
+Template.threadPage.events({
+    "submit .write-post": function(evt,template) {
+        evt.preventDefault();
+        var message_text = template.find('textarea').value;
+        var loc = window.location.href.split('/');
+        var thread = loc[loc.length-1];
+        Meteor.call('postInsert', message_text, thread, function(err,result){
+            if (err)
+                alert(err.reason);
+            else
+                template.find('textarea').value = "";
+        });
+    }
+});

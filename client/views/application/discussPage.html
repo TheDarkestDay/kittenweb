@@ -2,4 +2,22 @@
     <h1>
         Discussions
     </h1>
+    {{#if currentUser}}
+        <a href="/newthread">
+            Create thread
+        </a>
+    {{/if}}
+    {{#each thread}}
+        <div class="thread-block">
+            <h2>
+                Topic: {{name}}
+            </h2>
+            <span>
+                Created by {{author_name}}
+            </span>
+            <a href="{{pathFor 'threadPage'}}">
+                Join chat
+            </a>
+        </div>
+    {{/each}}
 </template>

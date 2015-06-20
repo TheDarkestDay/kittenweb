@@ -1,0 +1,23 @@
+<template name="threadPage">
+    <div class="thread-container">
+        {{#each post}}
+            <div class="message-wrapper">
+                {{author}}
+                {{message}}
+                <span class="date-wrapper">
+                    {{date_created}}
+                </span>
+            </div>
+        {{/each}}
+    </div>
+    {{#if currentUser}}
+        <form class="write-post">
+            <label>
+                Write your message here:
+            </label>
+            <textarea>
+            </textarea>
+            <input type="submit" value="Submit">
+        </form>
+    {{/if}}
+</template>

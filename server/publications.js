@@ -13,3 +13,11 @@ Meteor.publish('concreteCat', function(catId) {
 Meteor.publish('images', function() {
     return Images.find();
 });
+
+Meteor.publish('threads', function() {
+    return threads.find();
+});
+
+Meteor.publish('postsInThread', function(threadId) {
+    return posts.find({thread_id: threadId});
+});
