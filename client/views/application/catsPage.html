@@ -2,6 +2,45 @@
     <h1>
         Some kitties
     </h1>
+    <form class="search-cat-form">
+        <div class="form-group">
+            <label for="catName">
+                Name
+            </label>
+            <input type="text" id="catName">
+        </div>
+        <div class="form-group">
+            <label>
+                Sex
+            </label>
+            <input type="radio" name="catSex" value="male" checked>Male
+            <input type="radio" name="catSex" value="female">Female
+        </div>
+        <div class="form-group">
+            <label for="catAgeMin">
+                Aged from
+            </label>
+            <input type="number" id="catAgeMin">
+            <label for="catAgeMax">
+                to
+            </label>
+            <input type="number" id="catAgeMax">
+        </div>
+        <div class="form-group slider-container">
+            <label for="catWeight">
+                Weight
+            </label>
+            <div id="rangeSlider">
+            </div>
+        </div>
+        <div class="form-group kindSelect">
+            <label for="catKind">
+                Kind
+            </label>
+            <input type="text" id="catKind">
+        </div>
+        <input type="submit" value="Search">
+    </form>
     <div class="row">
     {{#each kitty}}
     <div class="cat col-md-4">

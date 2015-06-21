@@ -2,6 +2,10 @@ Meteor.publish('allCats', function() {
     return cats.find();
 });
 
+Meteor.publish('findCats', function(filter) {
+    return cats.find(filter);
+});
+
 Meteor.publish('userCats', function(owner) {
     return cats.find({owner: owner});
 });

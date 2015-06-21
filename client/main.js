@@ -1,3 +1,4 @@
+
 Template.layout.events({
     "click #logoutBtn": function(event, template) {
         event.preventDefault();
@@ -13,6 +14,7 @@ Template.layout.events({
         }
     }
 });
+
 
 /*-----------------------------------------------------------
 Login/Sign in forms
@@ -59,7 +61,47 @@ Template.crtAccPage.events({
     }
 });
 
+Template.catsPage.onRendered(function() {
+    $('#rangeSlider').noUiSlider({
+                start: [1, 3],
+                step: 1,
+                orientation: 'horizontal',
+                direction: 'ltr',
+                margin: 1,
+                connect: true,
+                range: {
+                    'min': 1,
+                    'max': 15
+                }
+            });
+    $('#rangeSlider').noUiSlider_pips({
+	   mode: 'steps',
+	   density: 1
+    });
+});
 
+
+Template.catsPage.events({
+    "submit .search-cat-form": function(evt, template) {
+        event.preventDefault();
+        filter = {
+            name: template.find('#catName').value
+          /*  sex: template.find('input:checked').value,
+            minage: template.find('#catAgeMin').value,
+            maxage: template.find('#catAgeMax').value,
+            minweght: parseInt(template.find('#rangeSlider').val()[0]),
+            maxweght: parseInt(template.find('#rangeSlider').val()[1]),
+            kind: template.find('#catKind').value */
+        };
+        Router.go('/cats/result');
+    }
+});
+
+Template.searchResultPage.helpers({
+    kitty: function() {
+        return cats.find();
+    }
+});
 
 
 

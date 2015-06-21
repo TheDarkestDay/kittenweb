@@ -121,3 +121,14 @@ textarea {
 .date-wrapper {
     float:right;
 }
+
+.search-cat-form {
+    border:1px solid black;
+    padding:15px;
+}
+
+
+
+.kindSelect {
+    margin-top:45px;
+}
