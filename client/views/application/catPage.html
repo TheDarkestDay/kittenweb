@@ -1,5 +1,41 @@
 <template name="catPage">
-        <h1>
-            {{name}}
-        </h1>
+        <form id="newCatForm">
+        <div class="form-group">
+            <label for="catName">
+                Name
+            </label>
+            <input type="text" id="catName" value="{{name}}">
+        </div>
+        <div class="form-group">
+            <input type="radio" name="catSex" value="male" checked>Male
+            <input type="radio" name="catSex" value="female">Female
+        </div>
+        <div class="form-group">
+            <label for="catAge">
+                Age
+            </label>
+            <input type="number" id="catAge" value="{{age}}">
+        </div>
+        <div class="form-group">
+            <label for="catWeight">
+                Weight
+            </label>
+            <input type="number" id="catWeight" value="{{weight}}">
+        </div>
+        <div class="form-group">
+            <label for="catKind">
+                Kind
+            </label>
+            <input type="text" id="catKind" value="{{kind}}">
+        </div>
+        <div class="form-group">
+            <label for="catImg">
+                Avatar
+            </label>
+            <input type="file" id="catImg">
+        </div>
+        <button type="submit">
+            Save changes
+        </button>
+    </form>
 </template>

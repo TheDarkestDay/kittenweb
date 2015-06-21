@@ -93,7 +93,7 @@ Template.catsPage.events({
             maxweght: parseInt(template.find('#rangeSlider').val()[1]),
             kind: template.find('#catKind').value */
         };
-        Router.go('/cats/result');
+        Router.go('/result');
     }
 });
 
