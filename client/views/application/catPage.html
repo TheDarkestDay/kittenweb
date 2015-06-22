@@ -1,5 +1,6 @@
 <template name="catPage">
-        <form id="newCatForm">
+    {{#if viewerIsOwner}}
+        <form id="editCatForm">
         <div class="form-group">
             <label for="catName">
                 Name
@@ -38,4 +39,16 @@
             Save changes
         </button>
     </form>
+    {{else}}
+        <div class="cat-card">
+            <img src="../{{avatar}}">
+            <div class="cat-info">
+                Name: {{name}}
+                Sex: {{sex}}
+                Age: {{age}}
+                Weight: {{weight}}
+                Kind: {{kind}}
+            </div>
+        </div>
+    {{/if}}
 </template>

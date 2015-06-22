@@ -122,6 +122,7 @@ Template.newCatPage.events({
             if (error)
                 return alert(error.reason);
             Router.go('/my');
+            imageURL = "";
         });
   //     Meteor.users.update({_id: Meteor.userId()}, {$set :{'profile.cats':prevKittens}});
     },
@@ -136,7 +137,40 @@ Template.newCatPage.events({
 });
 
 
+Template.catPage.helpers({
+    viewerIsOwner: function() {
+        return (cats.findOne().owner == Meteor.userId());
+    }
+});
 
+Template.catPage.events({
+    "submit #editCatForm": function(event,template) {
+        event.preventDefault();
+        var newKitten = {};
+        newKitten["owner"] = Meteor.userId();
+        newKitten["name"] = template.find('#catName').value;
+        newKitten["sex"] = template.find('input:checked').value;
+        newKitten["age"] = template.find('#catAge').value;
+        newKitten["weight"] = template.find('#catWeight').value;
+        newKitten["kind"] = template.find('#catKind').value;
+        //newKitten["avatar"] = imageURL;
+        Meteor.call("catUpdate", newKitten, cats.findOne()._id,function(err, result) {
+            if (err) {
+                alert(err.reason)
+            } else {
+                Router.go('/cats');
+            }
+        });
+    },
+    "change #catImg": function(event,template) {
+        event.preventDefault();
+        FS.Utility.eachFile(event, function(file) {
+            Images.insert(file, function(err, fileObj) {
+                imageURL = "cfs/files/images/"+fileObj._id;
+            });
+        });
+    }
+});
 
 
 Template.myCats.helpers({
