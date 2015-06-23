@@ -85,13 +85,13 @@ Template.catsPage.events({
     "submit .search-cat-form": function(evt, template) {
         event.preventDefault();
         filter = {
-            name: template.find('#catName').value
-          /*  sex: template.find('input:checked').value,
-            minage: template.find('#catAgeMin').value,
+            name: template.find('#catName').value,
+            sex: template.find('input:checked').value,
+         /*   minage: template.find('#catAgeMin').value,
             maxage: template.find('#catAgeMax').value,
             minweght: parseInt(template.find('#rangeSlider').val()[0]),
-            maxweght: parseInt(template.find('#rangeSlider').val()[1]),
-            kind: template.find('#catKind').value */
+            maxweght: parseInt(template.find('#rangeSlider').val()[1]), */
+            kind: template.find('#catKind').value 
         };
         Router.go('/result');
     }
@@ -154,11 +154,12 @@ Template.catPage.events({
         newKitten["weight"] = template.find('#catWeight').value;
         newKitten["kind"] = template.find('#catKind').value;
         //newKitten["avatar"] = imageURL;
-        Meteor.call("catUpdate", newKitten, cats.findOne()._id,function(err, result) {
+        Meteor.call("catUpdate", newKitten, cats.findOne()._id, imageURL, function(err, result) {
             if (err) {
                 alert(err.reason)
             } else {
                 Router.go('/cats');
+                imageURL = "";
             }
         });
     },
@@ -168,6 +169,16 @@ Template.catPage.events({
             Images.insert(file, function(err, fileObj) {
                 imageURL = "cfs/files/images/"+fileObj._id;
             });
+        });
+    },
+    "click #removeCat": function(event) {
+        event.preventDefault();
+        Meteor.call("catDelete", cats.findOne()._id, function(err,result) {
+            if (err) {
+                alert(err.reason);
+            } else {
+                Router.go('/cats');
+            }
         });
     }
 });
