@@ -63,7 +63,7 @@ Template.crtAccPage.events({
 
 Template.catsPage.onRendered(function() {
     $('#rangeSlider').noUiSlider({
-                start: [1, 3],
+                start: [1, 15],
                 step: 1,
                 orientation: 'horizontal',
                 direction: 'ltr',
@@ -84,15 +84,29 @@ Template.catsPage.onRendered(function() {
 Template.catsPage.events({
     "submit .search-cat-form": function(evt, template) {
         event.preventDefault();
-        filter = {
-            name: template.find('#catName').value,
-            sex: template.find('input:checked').value,
-         /*   minage: template.find('#catAgeMin').value,
-            maxage: template.find('#catAgeMax').value,
-            minweght: parseInt(template.find('#rangeSlider').val()[0]),
-            maxweght: parseInt(template.find('#rangeSlider').val()[1]), */
-            kind: template.find('#catKind').value 
+        var name = template.find('#catName').value;
+        var sex = template.find('input:checked').value;
+        var minage = template.find('#catAgeMin').value;
+        var maxage = template.find('#catAgeMax').value;
+        var minweight = parseInt($('#rangeSlider').val()[0]);
+        var maxweight = parseInt($('#rangeSlider').val()[1]); 
+        var kind = template.find('#catKind').value ;
+        filter = {};
+        if (sex != "nope")
+            filter["sex"] = sex;
+        filter["weight"] = {
+            $gte: minweight,
+            $lte: maxweight
         };
+        if (minage != "")
+            filter["age"]["$gte"] = minage;
+        if (maxage != "")
+            filter["age"]["$lte"] = maxage;
+        if (name != "")
+            filter["name"] = name;
+        if (kind != "")
+            filter["kind"] = kind;
+        console.log(filter);
         Router.go('/result');
     }
 });
@@ -113,8 +127,8 @@ Template.newCatPage.events({
             owner: Meteor.userId(),
             name: template.find('#catName').value,
             sex: template.find('input:checked').value,
-            age: template.find('#catAge').value,
-            weight: template.find('#catWeight').value,
+            age: parseInt(template.find('#catAge').value),
+            weight: parseInt(template.find('#catWeight').value),
             kind: template.find('#catKind').value,
             avatar: imageURL
         }
@@ -150,8 +164,8 @@ Template.catPage.events({
         newKitten["owner"] = Meteor.userId();
         newKitten["name"] = template.find('#catName').value;
         newKitten["sex"] = template.find('input:checked').value;
-        newKitten["age"] = template.find('#catAge').value;
-        newKitten["weight"] = template.find('#catWeight').value;
+        newKitten["age"] = parseInt(template.find('#catAge').value);
+        newKitten["weight"] = parseInt(template.find('#catWeight').value);
         newKitten["kind"] = template.find('#catKind').value;
         //newKitten["avatar"] = imageURL;
         Meteor.call("catUpdate", newKitten, cats.findOne()._id, imageURL, function(err, result) {
