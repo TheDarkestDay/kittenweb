@@ -136,3 +136,9 @@ textarea {
 #newCatForm {
     margin-top:15px;
 }
+
+
+
+.profile-img {
+    max-width:100%;
+}

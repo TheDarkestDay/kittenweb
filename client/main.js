@@ -207,7 +207,7 @@ Template.myCats.helpers({
 
 Template.catsPage.helpers({
     kitty: function() {
-        return cats.find();
+        return cats.find({},{sort: { _id: 1}});
     }
 });
 
@@ -222,7 +222,6 @@ Template.discussPage.helpers({
 Template.newThreadPage.events({
     "click #crt-thread-btn": function(evt, template) {
         evt.preventDefault();
-        console.log('blah');
         var topicName = template.find("#topic-name").value;
         Meteor.call('threadInsert',topicName, function(err, result) {
             if (err)
